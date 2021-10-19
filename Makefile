@@ -1,11 +1,17 @@
 # build z3 with static lib
 
+ifeq ($(shell uname),Darwin)
+    LDD := otool -L
+else
+    LDD := ldd
+endif
+
 z3-static-opt:
 	ocamlfind ocamlopt -verbose -o z1.exe -thread -package z3-static -linkpkg z1.ml
 	./z1.exe
 
 z3-static-opt-show:
-	ldd z1.exe | grep z3 || echo "NONE"
+	$(LDD) z1.exe | grep z3 || echo "NONE"
 
 z3-static-bc:
 	ocamlfind ocamlc -verbose -o z1.bc -thread -package z3-static -linkpkg z1.ml
@@ -29,7 +35,7 @@ z3-shared-opt:
 	./z2.exe
 
 z3-shared-opt-show:
-	ldd z2.exe | grep z3
+	$(LDD) z2.exe | grep z3
 
 z3-shared-bc:
 	ocamlfind ocamlc -o z2.bc -verbose -thread -package z3 -linkpkg z1.ml
@@ -70,10 +76,10 @@ z3-static-info:
 	ocamlobjinfo $$(opam var z3-static:lib)/z3ml.cmxa
 
 z3-shared-stub-info:
-	ldd $$(opam var lib)/stublibs/dllz3ml.so
+	$(LDD) $$(opam var lib)/stublibs/dllz3ml.so
 
 z3-static-stub-info:
-	ldd $$(opam var lib)/stublibs/dllz3ml-static.so
+	$(LDD) $$(opam var lib)/stublibs/dllz3ml-static.so
 
 # 3. play on llvm for comparison
 
@@ -82,7 +88,7 @@ llvm-static-opt:
 	./m2.exe
 
 llvm-static-opt-show:
-	ldd m2.exe | grep LLVM || echo "NONE"
+	$(LDD) m2.exe | grep LLVM || echo "NONE"
 	
 llvm-static-bc:
 	ocamlfind ocamlc -verbose -o m2.bc -predicates llvm.static -package llvm.target -linkpkg m1.ml
@@ -103,7 +109,7 @@ llvm-shared-opt:
 	./m1.exe
 
 llvm-shared-opt-show:
-	ldd m1.exe | grep LLVM
+	$(LDD) m1.exe | grep LLVM
 
 llvm-shared-bc:
 	ocamlfind ocamlc -o m1.bc -package llvm.target -linkpkg m1.ml
@@ -131,5 +137,5 @@ llvm-static-info:
 	ocamlobjinfo $$(opam var llvm:lib)/static/llvm_target.cma
 
 llvm-stub-info:
-	ldd $$(opam var lib)/stublibs/dllllvm.so
+	$(LDD) $$(opam var lib)/stublibs/dllllvm.so
 
