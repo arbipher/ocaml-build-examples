@@ -1,0 +1,1 @@
+let () = print_endline (Llvm_target.Target.default_triple ())

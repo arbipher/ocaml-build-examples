@@ -1,0 +1,7 @@
+*.cmo
+*.cmi
+*.cmx
+*.bc
+*.exe
+*.o
+*.so
