@@ -8,6 +8,6 @@ let () =
   let one = Arithmetic.Integer.mk_numeral_i ctx 1 in
   let eq_x_1 = Boolean.mk_eq ctx one x in
   Z3.Solver.add solver [eq_x_1];
-  let _ = Z3.Solver.check solver [] in
+  ignore @@ Z3.Solver.check solver [];
   print_endline @@ Solver.to_string solver;
   ()
