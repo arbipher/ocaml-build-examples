@@ -1,3 +1,6 @@
+_opam
+z3
+
 *.cmo
 *.cmi
 *.cmx

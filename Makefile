@@ -1,3 +1,12 @@
+
+# prepare dev directory
+
+local-opam:
+	opam switch create ./
+
+local-z3:
+	git clone https://github.com/Z3Prover/z3.git
+
 # build z3 with static lib
 
 ifeq ($(shell uname),Darwin)
