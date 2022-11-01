@@ -1,5 +1,5 @@
 _opam
-z3
+vendor
 
 *.cmo
 *.cmi

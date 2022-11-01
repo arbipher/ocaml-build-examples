@@ -2,7 +2,7 @@
 # prepare dev directory
 
 local-opam:
-	opam switch create ./
+	opam switch create ./ 4.14.0
 
 local-z3:
 	git clone https://github.com/Z3Prover/z3.git
