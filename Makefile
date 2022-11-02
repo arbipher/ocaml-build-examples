@@ -1,11 +1,23 @@
-
+Z3_SRC = vendor/z3
+JOBS = 12
 # prepare dev directory
 
 local-opam:
 	opam switch create ./ 4.14.0
+	opam repo add my_opam https://github.com/arbipher/opam-repository.git
+	opam install zarith conf-gmp conf-python-3 conf-c++
 
 local-z3:
 	git clone https://github.com/Z3Prover/z3.git
+	# opam pin add vendor/z3 --dev-repo
+	# opam: bad package format
+
+# from opam
+build-z3-1:
+	cd $(Z3_SRC) && python3 scripts/mk_make.py --ml
+
+build-z3-2:
+	cd $(Z3_SRC) && make -C build -j $(JOBS)
 
 # build z3 with static lib
 
