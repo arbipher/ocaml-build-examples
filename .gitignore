@@ -1,5 +1,7 @@
 _opam
+_build
 vendor
+build
 
 *.cmo
 *.cmi
