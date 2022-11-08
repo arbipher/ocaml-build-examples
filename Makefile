@@ -3,6 +3,8 @@ JOBS = 12
 SRC = via_terminal
 # prepare dev directory
 
+include Makefile.bin.mk
+
 local-opam:
 	opam switch create ./ 4.14.0
 	opam repo add my_opam https://github.com/arbipher/opam-repository.git
