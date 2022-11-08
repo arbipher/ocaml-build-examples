@@ -1,3 +1,6 @@
 (executables
  (names read_file)
- (libraries fmt z3 sudu))
+ (libraries fmt z3 sudu)
+ (promote
+  (until-clean)
+  (into "../..")))

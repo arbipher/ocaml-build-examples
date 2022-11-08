@@ -2,6 +2,7 @@ _opam
 _build
 vendor
 build
+this_opam
 
 *.cmo
 *.cmi

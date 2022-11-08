@@ -1,9 +1,9 @@
-Z3_SRC = vendor/z3
+Z3_SRC = z3
 JOBS = 12
 SRC = via_terminal
 # prepare dev directory
 
-include Makefile.bin.mk
+include Makefile.weird.mk
 
 local-opam:
 	opam switch create ./ 4.14.0
@@ -14,19 +14,23 @@ local-dev:
 	opam install utop ocamlformat ocaml-lsp-server
 
 local-z3:
-	git clone https://github.com/Z3Prover/z3.git
+	# git clone https://github.com/Z3Prover/z3.git
+	git submodule add https://github.com/Z3Prover/z3.git
 	# opam pin add vendor/z3 --dev-repo
 	# opam: bad package format
 
 # from opam
 build-z3-1:
-	cd $(Z3_SRC) && python3 scripts/mk_make.py --ml
+	cd $(Z3_SRC) && python3 scripts/mk_make.py --debug --ml
 
 build-z3-2:
 	cd $(Z3_SRC) && make -C build -j $(JOBS)
 
 install-z3:
 	ocamlfind install z3 $(Z3_SRC)/build/api/ml/* -dll $(Z3_SRC)/build/libz3.*
+
+remove-z3:
+	ocamlfind remove z3
 
 # build z3 with static lib
 
