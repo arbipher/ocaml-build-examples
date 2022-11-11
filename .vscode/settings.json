@@ -1,0 +1,10 @@
+{
+  "cmake.sourceDirectory": "${workspaceFolder}/z3",
+  "files.associations": {
+    "*.natodefa": "ocaml",
+    "*.pi": "haskell",
+    "*.rkt": "racket",
+    "*.jay": "ocaml",
+    "bitset": "cpp"
+  },
+}

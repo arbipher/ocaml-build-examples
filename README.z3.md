@@ -95,4 +95,22 @@ void cmd_context::set_solver_factory(solver_factory * f) {
     }
 }
 
+void cmd_context::check_sat(unsigned num_assumptions, expr * const * assumptions) {
+  if (m_opt) {
+    ...
+    get_opt()->optimize(asms);
+  } else if (m_solver) {
+    m_solver->check_sat(num_assumptions, assumptions);
+  }
+}
+
+// which solver.check_sat_core(...)
+
+// choice 1 - sat/sat_solver/inc_sat_solver.cpp
+lbool check_sat_core
+
+// choice 2 - solver/combined_solver.cpp
+lbool check_sat_core
+
+
 ```
