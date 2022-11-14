@@ -10,3 +10,6 @@ good:
 
 utop:
 	dune utop
+
+trace:
+	strace -k z3/build/z3 weird_case/dummy.smt2 2>trace.log
