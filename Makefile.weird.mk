@@ -8,8 +8,14 @@ bad: readfile
 good:
 	./read_file.exe weird_case/good.smt2
 
+dummy:
+	./read_file.exe weird_case/dummy.smt2
+
 utop:
 	dune utop
 
 trace:
 	strace -k z3/build/z3 weird_case/dummy.smt2 2>trace.log
+
+trace:
+	sudo dtruss -s z3 weird_case/partial.smt2 2> trace.log

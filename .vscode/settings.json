@@ -5,6 +5,7 @@
     "*.pi": "haskell",
     "*.rkt": "racket",
     "*.jay": "ocaml",
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "iosfwd": "cpp"
   },
 }
