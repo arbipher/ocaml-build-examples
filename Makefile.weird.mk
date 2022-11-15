@@ -19,3 +19,6 @@ trace:
 
 trace:
 	sudo dtruss -s z3 weird_case/partial.smt2 2> trace.log
+
+write:
+	dune runtest --auto-promote

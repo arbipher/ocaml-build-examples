@@ -1,116 +1,92 @@
-# check()
+title: Z3 and its internal
+---
 
-From `solver.h`, search `check_sat`
 
-```c++
-// 
-lbool L_FALSE | L_TRUE | L_UNDER 
+# Prerequisite
 
-// solver/solver.h
-class solver: {
-  lbool check_sat(unsigned num_assumptions, expr * const * assumptions);
-  virtual lbool check_sat_core(unsigned num_assumptions, expr * const * assumptions) = 0;
-}
+This check things work well.
 
-m_solver->check_sat(0, nullptr);
+```sh
+$ z3 --version
+Z3 version 4.11.2 - 64 bit
 ```
 
-Search `solver::check_sat`
+and 
 
-```c++
-// muz/spacer/spacer_uic_solver.cpp
-lbool iuc_solver::check_sat_core(...)
-
-// opt/opt_solver.cpp
-lbool opt_solver::check_sat_core2(...)
-
-// smt/smt_solver.cpp
-lbool check_sat_core2(...)
-
-// solver/solver.coo
-lbool solver::check_sat(...) {
-  check_sat_core(...)
-}
-
-// solver/tactic2solver.cpp
-lbool tactic2solver::check_sat_core2(...) {
-
-}
+```sh
+$ ls smt_files | wc -l
+       4
 ```
 
-# main
+# Motivation
 
-```c++
-// shell/main.cpp
+This seminar/writeup is for demystifying Z3. At some moment, we realized we may not continue to treat Z3 as a magical blackbox any more.
 
-int STD_CALL main(int argc, char ** argv)
+References:
 
-read_smtlib2_commands(g_input_file)
+- https://microsoft.github.io/z3guide/
+- https://theory.stanford.edu/~nikolaj/programmingz3.html
 
-// shell/<fmt_frontend.cpp>
+Project `z3` contains :
 
-// shell/smtlib_frontend.cpp
+- an executable `z3.exe` plus
+- a library `z3` with bindings in many languages.
+  
+`z3` is mainly written in C++. Its OCaml binding is built around a C wrapper upon its C++ library.
 
-read_smtlib2_commands(char const * file_name)
+# Terms
 
-// parser/smt2/smt2parser.cpp
-parse_smt2_commands(ctx, in) {
-  p()
-}
+Basics:
 
-bool operator()() {
-  try {
-    scan_core();
-  }
+- `SAT`
+- `SMT`
+- `logic`
+- `formula`(`expression`, `constraint`)
+- `solver`
+- `theory`
+- `quantifier`
 
-  while (true) {
-    parse_cmd();
-  }
-}
+Concepts:
 
-void parse_cmd() {
-  ...
-  parse_check_sat_assuming()
-}
+- `uninterpreted functions`
+- `sort` / `type` / `kind`
+- `model`
+- `proof`
+- `unsat_core`
 
-void parse_check_sat_assuming() {
-  m_ctx.check_sat(expr_stack().size() - spos, expr_stack().data() + spos);
-}
+Solving:
 
+- `strategy`
+- `goal`
+- `tactic`
+- `probe`
+- `objective`
+- `optimization`
 
-class parser {
-    ast_manager *        m_manager;
-    cmd_context &        m_ctx;
-}
+Extensions:
 
-heading to 
-// parser/smt2/smt2parser.cpp
-cmd_context ctx;
-ctx.set_solver_factory(mk_smt_strategic_solver_factory());
+- `soft constraint`
 
-// cmd_context/cmd_context.cpp
-void cmd_context::set_solver_factory(solver_factory * f) {
-    if (has_manager() && f != nullptr) {
-        mk_solver();
-    }
-}
+Implementation:
 
-void cmd_context::check_sat(unsigned num_assumptions, expr * const * assumptions) {
-  if (m_opt) {
-    ...
-    get_opt()->optimize(asms);
-  } else if (m_solver) {
-    m_solver->check_sat(num_assumptions, assumptions);
-  }
-}
-
-// which solver.check_sat_core(...)
-
-// choice 1 - sat/sat_solver/inc_sat_solver.cpp
-lbool check_sat_core
-
-// choice 2 - solver/combined_solver.cpp
-lbool check_sat_core
+- `parameter`: https://github.com/Z3Prover/z3/blob/master/Parameters.md
+- `statistics`: `(get-stat)`
 
 
+
+<!-- $MDX file=smt_files/dummy.smt2 -->
+```smt2
+(declare-fun dummy () Bool)
+(assert (not dummy))
+(check-sat)
+(get-model)
+```
+
+```sh
+$ z3/build/z3 smt_files/dummy.smt2
+sat
+(
+  (define-fun dummy () Bool
+    false)
+)
 ```

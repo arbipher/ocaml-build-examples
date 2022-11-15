@@ -1,1 +1,7 @@
 (data_only_dirs this_opam)
+
+(mdx
+ (files "README.z3.md")
+ (deps
+  "z3/build/z3"
+  (glob_files "smt_files/**")))
