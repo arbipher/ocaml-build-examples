@@ -3,5 +3,19 @@
 (mdx
  (files "README.z3.md")
  (deps
-  "z3/build/z3"
+  z3.exe
   (glob_files "smt_files/**")))
+
+(rule
+ (target z3.exe)
+ ; (deps "z3/build/z3")
+ (action
+  (copy "z3/build/z3" %{target})))
+
+; Error: 'action' was deleted in version 2.0 of the dune language. Use a rule
+; stanza with the alias field instead
+; (alias
+;  (name move_z3_bin)
+;  (deps "z3/build/z3")
+;  (action
+;   (copy %{deps} z3)))

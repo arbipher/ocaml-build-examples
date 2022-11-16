@@ -1,0 +1,13 @@
+(declare-fun dummy () Bool)
+(assert (not dummy))
+(check-sat)
+(get-model)
+(get-info :error-behavior)
+(get-info :name)
+(get-info :authors)
+(get-info :version)
+(get-info :status)
+(get-info :reason-unknown)
+(get-info :all-statistics)
+(get-info :assertion-stack-levels)
+(get-info :rlimit) ;Resource limit container

@@ -11,3 +11,6 @@ this_opam
 *.exe
 *.o
 *.so
+
+perf.data
+perf.data.old

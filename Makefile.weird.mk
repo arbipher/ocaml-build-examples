@@ -17,8 +17,8 @@ utop:
 trace:
 	strace -k z3/build/z3 weird_case/dummy.smt2 2>trace.log
 
-trace:
+truss:
 	sudo dtruss -s z3 weird_case/partial.smt2 2> trace.log
 
 write:
-	dune runtest --auto-promote
+	dune runtest --auto-promote || true
