@@ -16,7 +16,7 @@ and
 
 ```sh
 $ ls smt_files | wc -l
-6
+8
 ```
 
 # Motivation
@@ -30,7 +30,7 @@ References:
 
 Project `z3` contains :
 
-- an executable `z3.exe` plus
+- an executable `z3.exe`
 - a library `z3` with bindings in many languages.
   
 `z3` is mainly written in C++. Its OCaml binding is built around a C wrapper upon its C++ library.
@@ -48,8 +48,8 @@ Theories:
 
 - `formula`(`expression`, `constraint`): s-expression in SMT-LIB.
 - `logic`: e.g. `QF` for quantifier free; `AX` for theory `ArraysEX`, `BV` for `FixedSizeBitVectors`; `IA`/`RA` for `Integer/Real Arithmetic`; `L`/`N` (before `IA`/`RA`) for linear/non-linear fragment; `UF` for free sort and function symbols.
-- `theory`: concerning equivalent expressions with meta-variables.
-- `quantifier`: for any `x` such that ..; there exists a `x` such that ..
+- `theory`: SMT-LIB logics refer to one or more theories below, e.g. `Core` (Bool), `Int`, `Float`, `String`, `ArrayEx`
+concerning equivalent expressions with meta-variables.
 
 Here is a simple example:
 
@@ -78,8 +78,9 @@ sat
 
 Concepts:
 
-- `solver`
+- `quantifier`: for any `x` such that ..; there exists a `x` such that ..
 - `uninterpreted functions`
+- `euf`: The logic of equality and uninterpreted function, EUF, is a basic ingredient for first-order predicate logic.
 - `sort` / `type` / `kind`
 - `model`
 - `proof`
@@ -140,12 +141,17 @@ See the [post](https://stackoverflow.com/questions/45457131/what-is-the-relation
 
 Solving:
 
+- `solver`
 - `strategy`
-- `goal`
+- `goal`: A goal (aka problem). A goal is essentially a set of formulas, that can be solved and/or transformed using tactics and solvers.
 - `tactic`
-- `probe`
+- `probe`:  (aka formula measures)
 - `objective`
 - `optimization`
+
+Z3 picks the `solver` depending on the involving logics and the mode. Z3 contain _handcrafted heuristic_ searching method that highly tuned for known problems. It also supports custom strategies
+
+https://microsoft.github.io/z3guide/docs/strategies/goals
 
 Extensions:
 
@@ -155,6 +161,5 @@ Implementation:
 
 - `parameter`: https://github.com/Z3Prover/z3/blob/master/Parameters.md
 - `statistics`: `(get-stat)`
-
-
+- `trace`: debug message (unlike debug assertions). See `docs/Trace_.code-search` for all tags. e.g. `z3/build/z3 smt_files/partial.smt2 -tr:goal -tr:datatype`
 

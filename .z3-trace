@@ -1,0 +1,165 @@
+-------- [datatype] mk_pdatatype_decl ../src/cmd_context/pdecl.cpp:941 ---------
+List has 1 parameters
+------------------------------------------------
+-------- [datatype] commit ../src/cmd_context/pdecl.cpp:632 ---------
+List
+------------------------------------------------
+-------- [datatype] mk_datatypes ../src/ast/datatype_decl_plugin.cpp:551 ---------
+declaring List
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate List
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:304 ---------
+not setting size for List
+------------------------------------------------
+-------- [datatype] compute_datatype_size_functions ../src/ast/datatype_decl_plugin.cpp:840 ---------
+List 
+------------------------------------------------
+-------- [datatype] compute_datatype_size_functions ../src/ast/datatype_decl_plugin.cpp:845 ---------
+Sort size for List
+------------------------------------------------
+-------- [datatype] compute_datatype_size_functions ../src/ast/datatype_decl_plugin.cpp:879 ---------
+infinite List
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate List
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:296 ---------
+inserting k!0 infinite
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:300 ---------
+List has size infinite
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate List
+------------------------------------------------
+-------- [datatype] mk_pdatatype_decl ../src/cmd_context/pdecl.cpp:941 ---------
+Option has 1 parameters
+------------------------------------------------
+-------- [datatype] commit ../src/cmd_context/pdecl.cpp:632 ---------
+Option
+------------------------------------------------
+-------- [datatype] mk_datatypes ../src/ast/datatype_decl_plugin.cpp:551 ---------
+declaring Option
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:304 ---------
+not setting size for Option
+------------------------------------------------
+-------- [datatype] compute_datatype_size_functions ../src/ast/datatype_decl_plugin.cpp:840 ---------
+Option 
+------------------------------------------------
+-------- [datatype] compute_datatype_size_functions ../src/ast/datatype_decl_plugin.cpp:845 ---------
+Sort size for Option
+------------------------------------------------
+-------- [datatype] compute_datatype_size_functions ../src/ast/datatype_decl_plugin.cpp:893 ---------
+set sort size Option
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:296 ---------
+inserting k!0 infinite
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:300 ---------
+Option has size infinite
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] instantiate_datatype ../src/cmd_context/pdecl.cpp:678 ---------
+Option Int 
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:296 ---------
+inserting Int infinite
+------------------------------------------------
+-------- [datatype] mk_sort ../src/ast/datatype_decl_plugin.cpp:300 ---------
+Option has size infinite
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [goal] run ../src/tactic/core/elim_uncnstr_tactic.cpp:785 ---------
+(goal
+  (= (f 10) 1)
+  (= (g 1) (Some 3))
+  (= (g 2) none))
+------------------------------------------------
+-------- [datatype] setup_datatypes ../src/smt/smt_setup.cpp:880 ---------
+registering theory datatype...
+------------------------------------------------
+-------- [datatype] apply_sort_cnstr ../src/smt/theory_datatype.cpp:385 ---------
+apply_sort_cnstr: #27 (g 1)
+------------------------------------------------
+-------- [datatype] apply_sort_cnstr ../src/smt/theory_datatype.cpp:385 ---------
+apply_sort_cnstr: #27 (g 1)
+------------------------------------------------
+-------- [datatype] internalize_term ../src/smt/theory_datatype.cpp:298 ---------
+internalizing term:
+(Some 3)
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] internalize_term ../src/smt/theory_datatype.cpp:298 ---------
+internalizing term:
+(val (Some 3))
+------------------------------------------------
+-------- [datatype] assert_eq_axiom ../src/smt/theory_datatype.cpp:112 ---------
+adding axiom:
+3
+=
+(val (Some 3))
+------------------------------------------------
+-------- [datatype] apply_sort_cnstr ../src/smt/theory_datatype.cpp:385 ---------
+apply_sort_cnstr: #29 (Some 3)
+------------------------------------------------
+-------- [datatype] relevant_eh ../src/smt/theory_datatype.cpp:449 ---------
+relevant_eh: (Some 3)
+------------------------------------------------
+-------- [datatype] apply_sort_cnstr ../src/smt/theory_datatype.cpp:385 ---------
+apply_sort_cnstr: #32 (g 2)
+------------------------------------------------
+-------- [datatype] apply_sort_cnstr ../src/smt/theory_datatype.cpp:385 ---------
+apply_sort_cnstr: #32 (g 2)
+------------------------------------------------
+-------- [datatype] internalize_term ../src/smt/theory_datatype.cpp:298 ---------
+internalizing term:
+none
+------------------------------------------------
+-------- [datatype] apply_sort_cnstr ../src/smt/theory_datatype.cpp:385 ---------
+apply_sort_cnstr: #33 none
+------------------------------------------------
+-------- [datatype] relevant_eh ../src/smt/theory_datatype.cpp:449 ---------
+relevant_eh: none
+------------------------------------------------
+-------- [datatype] relevant_eh ../src/smt/theory_datatype.cpp:449 ---------
+relevant_eh: (val (Some 3))
+------------------------------------------------
+-------- [datatype] mk_value ../src/smt/theory_datatype.cpp:842 ---------
+(Some 3)
+depends on
+ 3
+------------------------------------------------
+-------- [datatype] mk_value ../src/smt/theory_datatype.cpp:842 ---------
+none
+depends on
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
+-------- [datatype] instantiate ../src/ast/datatype_decl_plugin.cpp:93 ---------
+instantiate Option
+------------------------------------------------
