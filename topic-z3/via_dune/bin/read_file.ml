@@ -49,10 +49,10 @@ let () =
   (* Q: is there a place to lookup all parameters?
      A: https://github.com/Z3Prover/z3/blob/master/Parameters.md *)
   Z3.set_global_param "debug_ref_count" "true";
-  Z3.set_global_param "memory_high_watermark" "44445555";
-  Z3.set_global_param "memory_high_watermark_mb" "44445555";
-  Z3.set_global_param "memory_max_alloc_count" "44445555";
-  Z3.set_global_param "memory_max_size" "44445555";
+  (* Z3.set_global_param "memory_high_watermark" "44445555";
+     Z3.set_global_param "memory_high_watermark_mb" "44445555";
+     Z3.set_global_param "memory_max_alloc_count" "44445555";
+     Z3.set_global_param "memory_max_size" "44445555"; *)
   Z3.set_global_param "verbose" "2";
   Z3.set_global_param "warning" "true";
   Z3.set_global_param "pp.decimal" "true";
@@ -62,4 +62,18 @@ let () =
   let phis = Bugcase.get_phis ctx smt_file in
   let solver = Z3.Solver.mk_solver ctx None in
   let result = Bugcase.get_result phis solver in
-  Bugcase.print_result solver result
+  Bugcase.print_result solver result;
+  let stat = Z3.Solver.get_statistics solver in
+  let keys = Z3.Statistics.get_keys stat in
+  Fmt.(pr "%a" (Dump.list string) keys);
+  let size = Z3.Statistics.get_size stat in
+  Printf.printf "\nsize: %d\n" size;
+
+  let r = Z3.Statistics.get (Z3.Solver.get_statistics solver) "rlimit count" in
+  let rr = Option.get r in
+  (* let rs = Z3.Statistics.Entry.to_string rr in *)
+  let ri = Z3.Statistics.Entry.get_int rr in
+  Printf.printf "st: %d\n" ri
+(* ;
+   let rr = Z3.get_global_param "rlimit" in
+   Fmt.(pr "%a" (Dump.option string) rr) *)

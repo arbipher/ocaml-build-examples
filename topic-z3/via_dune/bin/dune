@@ -1,5 +1,5 @@
 (executables
- (names read_file e1)
+ (names read_file e1 test)
  (libraries fmt z3 sudu)
  (promote
   (until-clean)
