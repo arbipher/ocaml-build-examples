@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "weng@cs.jhu.edu"
+authors: "MSR"
+homepage: "https://github.com/Z3prover/z3/"
+bug-reports: "https://github.com/Z3prover/z3/issues"
+license: "MIT"
+dev-repo: "git+https://github.com/Z3prover/z3.git"
+depexts: [
+  ["z3"] {os-family = "debian" | os-family = "ubuntu"}
+  # ["python3"] {os-distribution = "nixos"}
+  # ["python3"] {os-distribution = "alpine"}
+  # ["python39" "epel-release"] {os-distribution = "centos"}
+  # ["python3"] {os-distribution = "fedora"}
+  # ["python3"] {os-distribution = "ol"}
+  # ["python"] {os-distribution = "arch"}
+  # ["python3"] {os-family = "suse" | os-family = "opensuse"}
+  # ["dev-lang/python:3.6"] {os-distribution = "gentoo"}
+  # ["python3"] {os = "openbsd"}
+  # ["lang/python39"] {os = "netbsd"}
+  # ["python3"] {os = "freebsd"}
+  ["z3"] {os-distribution = "homebrew" & os = "macos"}
+  # ["python3"] {os-distribution = "macports" & os = "macos"}
+  # ["system:python3"] {os-distribution = "cygwinports"}
+]
+build: ["z3" "bubble_sort.smt2"]
+synopsis: "Virtual package relying on z3 installation"
+description: """
+This package can only install if z3 is available on the system.
+"""
+extra-files: ["bubble_sort.smt2" "md5=79f0196860c611f41d5a298e5d5b5560"]
+flags: conf
